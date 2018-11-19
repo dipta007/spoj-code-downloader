@@ -38,6 +38,7 @@ def GetPathOfChromeDriver():
 driver = webdriver.Chrome(GetPathOfChromeDriver())
 # driver.implicitly_wait(time_to_wait=30)
 
+
 def get_ext(comp_lang):
     if comp_lang == "cpp":
         return comp_lang
@@ -94,8 +95,7 @@ def GetDownloadedFile(handle):
     file = open(str(path), 'r')
     downloaded = file.readlines()
     downloaded = map(lambda s: s.strip(), downloaded)
-    print
-    "Existing: ", downloaded
+    print("Existing: ", downloaded)
     return downloaded
 
 
@@ -121,16 +121,25 @@ def main():
 
     driver.get(SUBMISSION_URL.format(UserID=handle))
 
+    alreadyDownloaed = GetDownloadedFile(handle)
+    downloaded = ""
+
     while True:
         submissions = driver.find_elements_by_class_name("kol1")
 
         for submission in submissions:
             WebDriverWait(driver, 30).until(expected_conditions.element_to_be_clickable((By.TAG_NAME, 'a')))
             tmp = submission.find_element_by_tag_name("a")
+            if tmp.text in alreadyDownloaed:
+                continue
+
             tmp.click()
 
             title = submission.find_element_by_class_name('sproblem').find_element_by_tag_name("a").text
-            fileName = handle + "/" + FileNameParse(title)
+            fileName = handle + "/" + FileNameParse(title) + "_" + tmp.text
+
+            downloaded += tmp.text
+            downloaded += "\n"
 
             time.sleep(waitTime)
 
@@ -165,6 +174,7 @@ def main():
 
         next_page[0].click()
 
+    SetDownloadedFile(handle, downloaded)
     driver.quit()
     end_time = time.time()
 
