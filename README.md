@@ -8,16 +8,16 @@ python 3, selenium, urllib
 
 ### Installing
 
-First install python 3.6
-Install [pip](https://pip.pypa.io/en/stable/installing/)
-git clone this repository
-Then go the folder from command line
+First install python 3.6  
+Install [pip](https://pip.pypa.io/en/stable/installing/)  
+git clone this repository  
+Then go the folder from command line  
 
 ```
 sudo pip install -r requirements.txt
 ```
 
-It will install all of the library needed
+It will install all of the library needed  
 
 ```
 1. Just run "python spoj-downloader.py" file on your terminal
@@ -28,8 +28,8 @@ It will install all of the library needed
 And,
 
 ```
-5. Go for a coffee or workout
-6. Coming home you will see all your accepted codes in a structerd way :) 
+4. Go for a coffee or workout
+5. Coming home you will see all your accepted codes in a structerd way :) 
 ```
 ## Features:
 
